@@ -6,4 +6,5 @@ echo "*** Updating node dependencies... ***"
 docker-compose exec naxela_service yarn install
 
 echo "*** Running Gulp .. ***"
-docker-compose exec naxela_service yarn run dev
+docker-compose exec naxela_service yarn run ntl dev
+#dev

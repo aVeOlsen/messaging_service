@@ -22,6 +22,7 @@
               type="email"
               id="email"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-1.5 md:p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+              :value="this.login.email"
               required
             />
           </div>
@@ -34,6 +35,7 @@
             <input
               type="password"
               id="password"
+              :value="this.login.password"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-1.5 md:p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
               required
             />
@@ -52,22 +54,35 @@
 
 <script>
 export default {
+  data() {
+    return {
+      login: {
+        email: "",
+        password: "",
+      },
+    };
+  },
   mounted() {
     const para = document.createElement("div");
     para.className =
       "flex flex-wrap gap-0.5 h-screen items-center justify-center  relative";
     let el =
-      '<div class = "  transition-colors duration-[1.5s] hover:duration-[0s] border-[#00FF00] h-[calc(5vw-2px)] w-[calc(5vw-2px)] md:h-[calc(4vw-2px)] md:w-[calc(4vw-2px)] lg:h-[calc(3vw-4px)] lg:w-[calc(3vw-4px)] bg-gray-900 hover:bg-[#00FF00]"></div>';
+      '<div class = "  transition-colors duration-[1.2s] hover:duration-[0s] border-[#00FF00] h-[calc(5vw-2px)] w-[calc(5vw-2px)] md:h-[calc(4vw-2px)] md:w-[calc(4vw-2px)] lg:h-[calc(3vw-4px)] lg:w-[calc(3vw-4px)] bg-gray-900 hover:bg-[#00FF00]"></div>';
     for (var k = 1; k <= 1000; k++) {
       el +=
-        '<div class = " transition-colors duration-[1.5s] hover:duration-[0s] border-[#008f11] h-[calc(5vw-2px)] w-[calc(5vw-2px)] md:h-[calc(4vw-2px)] md:w-[calc(4vw-2px)] lg:h-[calc(3vw-4px)] lg:w-[calc(3vw-4px)] bg-gray-900 hover:bg-[#008f11]"></div>';
+        '<div class = " transition-colors duration-[1.2s] hover:duration-[0s] border-[#008f11] h-[calc(5vw-2px)] w-[calc(5vw-2px)] md:h-[calc(4vw-2px)] md:w-[calc(4vw-2px)] lg:h-[calc(3vw-4px)] lg:w-[calc(3vw-4px)] bg-gray-900 hover:bg-[#008f11]"></div>';
     }
 
     para.innerHTML = el;
     document.getElementById("myDIV").appendChild(para);
   },
   methods: {
-    submit() {
+    async submit() {
+      console.log(this.login)
+      await this.$axios.post("./submit", {
+        body: JSON.stringify(this.login),
+      });
+
       alert("login");
     },
   },

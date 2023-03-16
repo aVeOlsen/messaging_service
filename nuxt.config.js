@@ -1,4 +1,7 @@
-export default {
+require('dotenv').config()
+console.log(process.env.NETLIFY_AUTH_TOKEN)
+
+module.exports= {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
 
   // Target: https://go.nuxtjs.dev/config-target
@@ -18,6 +21,10 @@ export default {
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
+  env:{
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+    netlifyAccess: process.env.NETLIFY_AUTH_TOKEN
+  },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ["@/assets/css/main.css"],
@@ -32,7 +39,9 @@ export default {
   buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ['@nuxtjs/axios', '@nuxtjs/dotenv'],
+
+  axios:{baseURL: './netlify/functions'},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

@@ -9,5 +9,8 @@ services:
     volumes:
       - ./:/var/www:cached
     tty: true
+    environment:
+      - NETLIFY_AUTH_TOKEN
     ports:
       - 3000:3000
+      - 8888:8888
